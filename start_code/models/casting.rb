@@ -29,11 +29,17 @@ class Casting
     SqlRunner.run(sql)
   end
 
+  def self.return_fees(movie)
+    sql = "SELECT castings.fee FROM castings WHERE movie_id = $1;"
+    values = [movie.id]
+    results = SqlRunner.run(sql, values)
+    results.map({})
+  end
+
   def self.all()
     sql = "SELECT * FROM castings"
     results = SqlRunner.run(sql)
     casting = results.map{|casting| Casting.new(casting)}
-    return casting
   end
 
 end
