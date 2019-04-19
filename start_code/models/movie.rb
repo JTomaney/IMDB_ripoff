@@ -35,13 +35,20 @@ class Movie
     return result
   end
 
-  # def self.calculate_remaining_budget(movie)
-  #   cast = movie.all_stars
-  #   p cast
-  #   fees = cast.map{ |star| star["fee"].to_i}
-  #   remaining = @budget - fees.sum
-  #   return remaining
-  # end
+  def get_cast()
+    sql = "SELECT * FROM castings WHERE movie_id = $1"
+    values = [@id]
+    cast_data = SqlRunner.run(sql, values)
+    cast = cast_data.map { |casting| Casting.new casting  }
+    return cast
+  end
+
+  def calculate_remaining_budget()
+    cast = self.get_cast()
+    fees = cast.map { |star| star.fee }
+    total_fees = fees.sum
+    remaining_budget = @budget - total_fees
+  end
 
   def self.delete_all()
     sql = "DELETE FROM movies;"

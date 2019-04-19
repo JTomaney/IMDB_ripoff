@@ -42,14 +42,5 @@ casting1.update()
 star1.last_name ='Monnroaae'
 star1.update
 
-# Movie.calculate_remaining_budget(movie2)
-
-Casting.return_fees(movie2)
-
-movie1.all_stars
-star1.all_movies
 binding.pry
 nil
-# Movie.all()
-# p Star.all()
-# p Casting.all()
